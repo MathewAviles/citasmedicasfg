@@ -239,5 +239,23 @@ def update_user_profile(id):
 def index():
     return "¡Hola, mundo! Esta es la API para el agendamiento de citas."
 
+@app.route('/debug-env')
+def debug_env():
+    db_url = os.getenv('DATABASE_URL')
+    jwt_secret = os.getenv('JWT_SECRET_KEY')
+    google_creds_file = 'google-credentials.json'
+    google_creds_exists = os.path.exists(google_creds_file)
+
+    db_status = "NO ESTABLECIDA"
+    if db_url:
+        # No mostramos la URL completa por seguridad
+        db_status = f"Establecida y comienza con: {db_url[:25]}..."
+
+    return jsonify({
+        "DATABASE_URL_ESTADO": db_status,
+        "JWT_SECRET_KEY_ESTABLECIDO": bool(jwt_secret),
+        "GOOGLE_CREDS_EXISTEN": google_creds_exists
+    })
+
 if __name__ == '__main__':
     app.run(debug=True)
