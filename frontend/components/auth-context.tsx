@@ -16,7 +16,7 @@ interface AuthContextType {
   user: User | null
   login: (email: string, password: string) => Promise<User | null>
   // 2. Firma de registro actualizada
-  register: (name: string, email: string, phone: string, password: string) => Promise<boolean>;
+  register: (name: string, email: string, phone: string, password: string) => Promise<{ success: boolean, error?: string }>;
   logout: () => void
   isAuthenticated: boolean
   token: string | null
@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   // 4. Función de registro conectada al backend
-  const register = async (name: string, email: string, phone: string, password: string): Promise<boolean> => {
+  const register = async (name: string, email: string, phone: string, password: string): Promise<{ success: boolean, error?: string }> => {
     try {
       const response = await fetch(`${API_URL}/register`, {
         method: 'POST',
@@ -73,19 +73,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
 
       if (response.ok) {
-        // Opcional: iniciar sesión automáticamente después del registro
         const loggedInUser = await login(email, password);
-        return !!loggedInUser;
+        return { success: !!loggedInUser };
       }
       
-      // Manejar errores de registro (ej: email ya existe)
       const errorData = await response.json();
-      console.error("Registration error:", errorData.message);
-      return false;
+      return { success: false, error: errorData.error || errorData.message || "Error desconocido." };
 
     } catch (error) {
       console.error("[API] Registration error:", error)
-      return false
+      return { success: false, error: "Error de conexión con el servidor." };
     }
   }
 

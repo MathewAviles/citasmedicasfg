@@ -10,10 +10,10 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000", "http://127.0.0.1:3000"], methods=['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], supports_credentials=True, allow_headers=["Content-Type", "Authorization"])
+CORS(app, origins=["http://localhost:3000", "http://127.0.0.1:3000", "https://fgmedic.netlify.app"], methods=['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], supports_credentials=True, allow_headers=["Content-Type", "Authorization"])
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///app.db')
-app.config['JWT_SECRET_KEY'] = 'super-secret'  # Cambia esto en producción
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'super-secret')
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 db = SQLAlchemy(app)
@@ -45,9 +45,18 @@ def register():
         phone_number=data.get('telefono'),
         role='patient'
     )
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify({"message": "User created successfully"}), 201
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"message": "User created successfully"}), 201
+    except Exception as e:
+        db.session.rollback()
+        # TEMPORARY DEBUGGING: Return the actual DB error.
+        # WARNING: Do NOT leave this in production code.
+        return jsonify({
+            "message": "Database commit failed.",
+            "error": str(e)
+        }), 500
 
 @app.route('/login', methods=['POST'])
 def login():

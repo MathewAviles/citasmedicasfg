@@ -43,9 +43,9 @@ export function RegisterDialog({ open, onOpenChange, onSwitchToLogin }: Register
 
     setIsLoading(true)
 
-    const success = await register(name, email, phone, password)
+    const result = await register(name, email, phone, password)
 
-    if (success) {
+    if (result.success) {
       onOpenChange(false)
       // Reset form
       setName("")
@@ -54,7 +54,7 @@ export function RegisterDialog({ open, onOpenChange, onSwitchToLogin }: Register
       setPassword("")
       setConfirmPassword("")
     } else {
-      setError("Este email ya está registrado. Por favor, usa otro o inicia sesión.")
+      setError(result.error || "Ocurrió un error desconocido al intentar registrarse.")
     }
 
     setIsLoading(false)
