@@ -1,0 +1,17 @@
+[build]
+  # Directorio base donde Netlify buscará el código del frontend
+  base = "frontend"
+
+  # Comando para construir tu aplicación de Next.js
+  command = "npm run build"
+
+  # Directorio que Netlify desplegará
+  publish = ".next"
+
+[build.environment]
+  # Asegúrate de que las dependencias de pnpm se instalen correctamente
+  PNPM_FLAGS = "--shamefully-hoist"
+
+[[plugins]]
+  # Plugin esencial para desplegar sitios Next.js en Netlify
+  package = "@netlify/plugin-nextjs"
