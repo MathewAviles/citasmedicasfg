@@ -143,7 +143,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
-    </Auth-Context.Provider>
+    </AuthContext.Provider>
   )
 }
 
