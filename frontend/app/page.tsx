@@ -309,20 +309,6 @@ export default function Home() {
               </CardContent>
             </Card>
           </div>
-
-          {/* General Symptoms */}
-          <div className="mt-8">
-            <Card className="overflow-hidden">
-              <div className="relative h-64 md:h-80 lg:h-96">
-                <Image
-                  src="/images/design-mode/image.png"
-                  alt="Síntomas generales - OPS"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </Card>
-          </div>
         </div>
       </section>
 
@@ -340,30 +326,30 @@ export default function Home() {
             <Card className="overflow-hidden">
               <div className="relative h-80">
                 <Image
-                  src="/images/design-mode/image.png"
-                  alt="Equipo médico FG.MEDIC"
+                  src="/images/design-mode/jeo.jpeg"
+                  alt="Dra. Jeoandy Fiallos"
                   fill
                   className="object-cover"
                 />
               </div>
               <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold text-foreground mb-2">Equipo Médico Profesional</h3>
-                <p className="text-muted-foreground">Comprometidos con tu salud y bienestar</p>
+                <h3 className="text-xl font-bold text-foreground mb-2">Dra. Jeoandy Fiallos</h3>
+                <p className="text-muted-foreground">Médico General</p>
               </CardContent>
             </Card>
 
             <Card className="overflow-hidden">
               <div className="relative h-80">
                 <Image
-                  src="/images/design-mode/image.png"
-                  alt="Atención médica personalizada"
+                  src="/images/design-mode/jese.jpeg"
+                  alt="Dra. Yesenia Fiallos."
                   fill
                   className="object-cover"
                 />
               </div>
               <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold text-foreground mb-2">Atención Personalizada</h3>
-                <p className="text-muted-foreground">Cuidado dedicado para cada paciente</p>
+                <h3 className="text-xl font-bold text-foreground mb-2">Dra. Yesenia Fiallos</h3>
+                <p className="text-muted-foreground">Médico General</p>
               </CardContent>
             </Card>
           </div>

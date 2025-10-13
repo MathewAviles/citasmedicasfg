@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   description:
     "Consultorio médico profesional en Riobamba. Medicina general, implantes subdérmicos y más. Agenda tu cita al 0978829127 / 0983780452",
   generator: "v0.app",
+  icons: {
+    icon: '/logo.png',
+  },
 }
 
 export default function RootLayout({

@@ -63,9 +63,9 @@ export function Footer() {
               </a>
             </div>
             <p className="text-sm text-muted-foreground mt-4">
-              @Fg.Medic
+              
               <br />
-              @fg_medic
+              
             </p>
           </div>
         </div>
