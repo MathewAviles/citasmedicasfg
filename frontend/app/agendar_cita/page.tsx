@@ -44,7 +44,8 @@ export default function AgendarCitaPage() {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/doctors");
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        const response = await fetch(`${apiUrl}/doctors`);
         if (response.ok) {
           const data = await response.json();
           setDoctors(data.doctors);
@@ -94,7 +95,8 @@ export default function AgendarCitaPage() {
     const isoString = appointmentDateTime.toISOString();
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/appointments", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await fetch(`${apiUrl}/appointments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
