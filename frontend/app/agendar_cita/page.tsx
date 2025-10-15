@@ -110,7 +110,7 @@ export default function AgendarCitaPage() {
       });
 
       if (response.ok) {
-        toast({ title: "¡Cita Agendada!", description: "Tu cita ha sido confirmada exitosamente." });
+        toast({ title: "¡Cita Agendada!", description: "Su cita ha sido agendada correctamente." });
         // Limpiar formulario y cerrar diálogo
         setSelectedDoctor("");
         setDate(new Date());
