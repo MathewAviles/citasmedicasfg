@@ -39,7 +39,8 @@ export default function DoctorDashboardPage() {
     if (!isAuthenticated || user?.role !== 'doctor') return;
     setIsLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:5000/appointments", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await fetch(`${apiUrl}/appointments`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -65,7 +66,8 @@ export default function DoctorDashboardPage() {
 
   const handleUpdateStatus = async (id: number, status: 'Atendida' | 'No Asistió') => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/appointments/${id}/status`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await fetch(`${apiUrl}/appointments/${id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +94,8 @@ export default function DoctorDashboardPage() {
   const handleSaveCalendarId = async () => {
     if (!user) return;
     try {
-      const response = await fetch(`http://127.0.0.1:5000/doctors/${user.id}/calendar`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await fetch(`${apiUrl}/doctors/${user.id}/calendar`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
